@@ -13,6 +13,14 @@ function log(m) {
     console.log(m)
 }
 
+function sleep(ms) {
+    return new Promise<void>(resolve => {
+        setTimeout(() => {
+            resolve()
+        }, ms)
+    })
+}
+
 async function atomic(f) {
     while (isUpdating) ;
     isUpdating = true
@@ -133,19 +141,26 @@ async function main() {
     }
 }
 
-async function update() {
+async function update(runner = false) {
     await atomic(async () => {
         log('Updating container...')
-        let containers = await getContainerList()
-        let newPort = 3000
-        if (containers[0].Ports[0].PublicPort === 3000) newPort = 3001
-        log(`Creating newer container with port ${newPort}...`)
-        await createContainer(false, newPort)
-        setTimeout(() => {
+        let containers = await getContainerList(runner)
+        if (!runner) {
+            let newPort = 3000
+            if (containers[0].Ports[0].PublicPort === 3000) newPort = 3001
+            log(`Creating newer container with port ${newPort}...`)
+            await createContainer(false, newPort)
+            await sleep(3000)
             log('Removing legacy container...')
             docker.getContainer(containers[0].Id).remove({force: true})
             console.log('Updated container!')
-        }, 3000)
+        } else {
+            log('Removing legacy container...')
+            docker.getContainer(containers[0].Id).remove({force: true})
+            log(`Creating new runner container...`)
+            await createContainer(true, 80)
+            console.log('Updated container!')
+        }
     })
 }
 
@@ -162,6 +177,15 @@ app.get('/update', async (req, res) => {
         return
     }
     await update()
+    res.send(true)
+})
+
+app.get('/update_nginx', async (req, res) => {
+    if (isUpdating) {
+        res.send(false)
+        return
+    }
+    await update(true)
     res.send(true)
 })
 
