@@ -12,5 +12,8 @@
   "scripts": {
     "build": "esbuild src/index.ts --bundle --outfile=build/index.js --platform=node --external:dockerode",
     "run": "node build/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.2"
   }
 }

@@ -1,6 +1,6 @@
 import Docker from 'dockerode'
 import express from 'express'
-import fs from 'fs'
+import * as fs from 'fs'
 
 const app = express()
 const docker = new Docker()
