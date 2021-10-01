@@ -20,5 +20,3 @@ sudo service docker start
 sudo usermod -a -G docker ec2-user
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
-docker login --username=clubnull --password=$1
-docker run --restart always -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock clubnull/portal:runner
