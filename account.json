@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "5ffae7951614e041bf5c39b1"
+  },
+  "id": "user",
+  "pwHash": "$2b$10$QgPZJRDt7Gxi2z9pdZypG.7HTyvK873YPybP.ZT9gTxbp3V3ulbki",
+  "name": "사용자",
+  "uid": 2019001,
+  "permission": 2
+},{
+  "_id": {
+    "$oid": "5ffaf94b1614e041bf5c39b3"
+  },
+  "id": "teacher",
+  "name": "선생님",
+  "permission": 3,
+  "uid": 1000001,
+  "pwHash": "$2b$10$QgPZJRDt7Gxi2z9pdZypG.7HTyvK873YPybP.ZT9gTxbp3V3ulbki"
+},{
+  "_id": {
+    "$oid": "5ffaf94f1614e041bf5c39b4"
+  },
+  "id": "admin",
+  "name": "관리자",
+  "permission": 4,
+  "uid": 1,
+  "pwHash": "$2b$10$QgPZJRDt7Gxi2z9pdZypG.7HTyvK873YPybP.ZT9gTxbp3V3ulbki"
+}]

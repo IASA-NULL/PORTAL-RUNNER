@@ -20,3 +20,4 @@ sudo service docker start
 sudo usermod -a -G docker ec2-user
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
+curl -s https://raw.githubusercontent.com/IASA-Null/PORTAL-RUNNER/master/account.json | mongoimport --db iasa_portal --collection account --file /dev/stdin --jsonArray
