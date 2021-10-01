@@ -195,3 +195,7 @@ app.listen(port, () => {
 
 main()
 setInterval(main, 10000)
+
+process.on('uncaughtException', function(err) {
+    console.log('Caught exception: ' + err);
+});
